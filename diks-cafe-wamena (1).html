@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dik'S Cafe Wamena - Coffee & Live Space</title>
+    <link rel="manifest" href="manifest.json">
+    <style>
+        :root {
+            --primary: #1E40AF;
+            --secondary: #3B82F6;
+            --accent: #F97316;
+            --dark: #1E293B;
+            --light: #F0F9FF;
+            --gradient: linear-gradient(135deg, #1E40AF 0%, #3B82F6 50%, #F97316 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: rgba(30, 64, 175, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+        }
+
+        .logo-text {
+            color: var(--light);
+        }
+
+        .logo-text h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .logo-text p {
+            font-size: 12px;
+            color: var(--light);
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .admin-btn {
+            background: linear-gradient(135deg, #F97316 0%, #FB923C 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .admin-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(249, 115, 22, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,101.3C1248,85,1344,75,1392,69.3L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 10px;
+            opacity: 0.95;
+        }
+
+        .hero .address {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        /* Live Music Banner */
+        .live-music-banner {
+            background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 50%, #F97316 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .live-music-banner h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .music-schedule {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .schedule-item {
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 15px 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .schedule-item h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .schedule-item p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Operating Hours */
+        .operating-hours {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .hours-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .hours-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hours-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: var(--primary);
+            margin-bottom: 40px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .menu-categories {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .menu-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .menu-item-content {
+            padding: 20px;
+        }
+
+        .menu-item h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .menu-item p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .menu-item-price {
+            color: var(--accent);
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s;
+            z-index: 999;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: #1E293B;
+            color: var(--light);
+            padding: 40px 20px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .footer p {
+            margin: 10px 0;
+            opacity: 0.9;
+        }
+
+        /* Modal Login */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 10px 50px rgba(0,0,0,0.3);
+        }
+
+        .modal-content h2 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .modal-buttons button {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #ddd;
+            color: var(--dark);
+        }
+
+        .modal-buttons button:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .admin-panel.active {
+            display: block;
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .admin-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .admin-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .image-upload {
+            border: 3px dashed #ddd;
+            border-radius: 15px;
+            padding: 40px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .image-upload:hover {
+            border-color: var(--primary);
+            background: rgba(30, 64, 175, 0.05);
+        }
+
+        .image-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin: 20px auto;
+            border-radius: 10px;
+        }
+
+        .menu-form {
+            display: grid;
+            gap: 20px;
+        }
+
+        .menu-form input,
+        .menu-form select,
+        .menu-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: inherit;
+        }
+
+        .menu-form textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .menu-list {
+            margin-top: 30px;
+        }
+
+        .menu-list-item {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .menu-list-item-info {
+            flex: 1;
+        }
+
+        .menu-list-item-info h4 {
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .menu-list-item-info p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .menu-list-item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-edit,
+        .btn-delete {
+            padding: 8px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.3s;
+        }
+
+        .btn-edit {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #f44336;
+            color: white;
+        }
+
+        .btn-edit:hover,
+        .btn-delete:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Offline Indicator */
+        .offline-indicator {
+            display: none;
+            background: #FFA726;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .offline-indicator.active {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                margin-top: 15px;
+            }
+
+            .music-schedule {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .whatsapp-float {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Offline Indicator -->
+    <div class="offline-indicator" id="offlineIndicator">
+        🔴 Mode Offline - Data disimpan secara lokal
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="" alt="Logo" class="logo" id="navLogo" style="display: none;">
+                <div class="logo-text">
+                    <h1>Dik'S Cafe Wamena</h1>
+                    <p>Coffee & Live Space</p>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="scrollToSection('home')">Home</a></li>
+                <li><a onclick="scrollToSection('menu')">Menu</a></li>
+                <li><a onclick="scrollToSection('contact')">Kontak</a></li>
+                <li><button class="admin-btn" id="loginBtn" onclick="openLoginModal()">Admin Login</button></li>
+                <li><button class="admin-btn hidden" id="logoutBtn" onclick="logout()">Logout</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Dik'S Cafe Wamena</h1>
+            <p>☕ Coffee & Live Space ☕</p>
+            <p class="address">📍 Jln. Gatot Subroto, No.99, Wamena<br>Kabupaten Jayawijaya, Provinsi Papua Pegunungan</p>
+        </div>
+    </section>
+
+    <!-- Live Music Banner -->
+    <section class="live-music-banner">
+        <h2>🎵 Live Music by Dik's Band 🎵</h2>
+        <div class="music-schedule">
+            <div class="schedule-item">
+                <h3>Senin - Kamis</h3>
+                <p>🎸 Acoustic Performance</p>
+            </div>
+            <div class="schedule-item">
+                <h3>Jumat - Minggu</h3>
+                <p>🎤 Full Band Performance</p>
+            </div>
+            <div class="schedule-item">
+                <h3>Malam Minggu</h3>
+                <p>🎧 DJ Session</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Operating Hours -->
+    <section class="operating-hours">
+        <h2 class="section-title">Jam Operasional</h2>
+        <div class="hours-grid">
+            <div class="hours-card">
+                <h3>Senin - Sabtu</h3>
+                <p>🕙 10:00 - 22:00 WITA</p>
+            </div>
+            <div class="hours-card">
+                <h3>Minggu</h3>
+                <p>🕒 15:00 - 22:00 WITA</p>
+            </div>
+            <div class="hours-card">
+                <h3>Malam Minggu</h3>
+                <p>🕙 10:00 - 23:00 WITA</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Guest View -->
+    <div id="guestView">
+        <!-- Menu Section -->
+        <section class="menu-section" id="menu">
+            <h2 class="section-title">Menu Kami</h2>
+            
+            <div class="menu-categories">
+                <button class="category-btn active" onclick="filterMenu('all')">Semua Menu</button>
+                <button class="category-btn" onclick="filterMenu('drinks')">Minuman</button>
+                <button class="category-btn" onclick="filterMenu('food')">Makanan</button>
+            </div>
+
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be loaded here -->
+                <div class="menu-item">
+                    <div class="menu-item-image">Foto Menu</div>
+                    <div class="menu-item-content">
+                        <h3>Menu akan ditampilkan di sini</h3>
+                        <p>Admin dapat menambahkan menu melalui panel admin</p>
+                        <div class="menu-item-price">Rp 0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-header">
+            <h2 class="section-title" style="margin: 0;">Panel Admin</h2>
+            <button class="btn-primary" style="padding: 12px 30px; border: none; border-radius: 10px; cursor: pointer;" onclick="logout()">Logout</button>
+        </div>
+
+        <!-- Logo Management -->
+        <div class="admin-card">
+            <h3>Kelola Logo Cafe</h3>
+            <div class="image-upload" onclick="document.getElementById('logoInput').click()">
+                <p>📷 Klik untuk upload logo</p>
+                <input type="file" id="logoInput" accept="image/*" style="display: none;" onchange="uploadLogo(event)">
+            </div>
+            <img id="logoPreview" class="image-preview" style="display: none;">
+        </div>
+
+        <!-- Menu Management -->
+        <div class="admin-card">
+            <h3>Kelola Menu</h3>
+            <form class="menu-form" onsubmit="addMenuItem(event)">
+                <select id="menuCategory" required>
+                    <option value="">Pilih Kategori</option>
+                    <option value="drinks">Minuman</option>
+                    <option value="coffee">Coffee/Espresso</option>
+                    <option value="dumdum">Dum-Dum</option>
+                    <option value="noncoffee">Non Coffee (Hot/Ice)</option>
+                    <option value="milky">Milky (Hot/Ice)</option>
+                    <option value="milkshake">Milkshake</option>
+                    <option value="moctail">Moctail</option>
+                    <option value="jus">Jus</option>
+                    <option value="food">Makanan</option>
+                    <option value="beef">Beef</option>
+                    <option value="chicken">Aneka Chicken</option>
+                    <option value="steak">Steak</option>
+                    <option value="spageti">Spageti</option>
+                    <option value="seafood">Seafood</option>
+                    <option value="ikan">Ikan</option>
+                    <option value="nasigoreng">Nasi Goreng</option>
+                    <option value="lalapan">Lalapan</option>
+                    <option value="ricebowl">Rice Bowl</option>
+                    <option value="nasibakar">Nasi Bakar</option>
+                    <option value="telur">Telur</option>
+                    <option value="mie">Aneka Mie</option>
+                    <option value="sayuran">Aneka Sayuran</option>
+                    <option value="snack">Snack Menu</option>
+                    <option value="sambal">Sambal</option>
+                </select>
+                
+                <input type="text" id="menuName" placeholder="Nama Menu" required>
+                
+                <textarea id="menuDescription" placeholder="Deskripsi Menu"></textarea>
+                
+                <input type="number" id="menuPrice" placeholder="Harga (Rp)" required>
+                
+                <div class="image-upload" onclick="document.getElementById('menuImageInput').click()">
+                    <p>📷 Upload Foto Menu (Opsional)</p>
+                    <input type="file" id="menuImageInput" accept="image/*" style="display: none;" onchange="previewMenuImage(event)">
+                </div>
+                <img id="menuImagePreview" class="image-preview" style="display: none;">
+                
+                <button type="submit" class="btn-primary" style="padding: 15px; border: none; border-radius: 10px; cursor: pointer; font-size: 16px;">
+                    Tambah Menu
+                </button>
+            </form>
+
+            <!-- Menu List -->
+            <div class="menu-list" id="menuList">
+                <!-- Menu items will be listed here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/6282313976974?text=Halo%20Dik%27S%20Cafe%2C%20saya%20ingin%20memesan..." class="whatsapp-float" target="_blank" title="Pesan via WhatsApp">
+        <svg viewBox="0 0 32 32" fill="currentColor" width="30" height="30">
+            <path d="M16 0c-8.837 0-16 7.163-16 16 0 2.825 0.737 5.607 2.137 8.048l-2.137 7.952 7.933-2.127c2.42 1.37 5.173 2.127 8.067 2.127 8.837 0 16-7.163 16-16s-7.163-16-16-16zM16 29.467c-2.482 0-4.908-0.646-7.07-1.87l-0.507-0.292-4.713 1.262 1.262-4.669-0.292-0.508c-1.207-2.100-1.847-4.507-1.847-6.924 0-7.435 6.048-13.483 13.483-13.483s13.483 6.048 13.483 13.483c0 7.435-6.048 13.483-13.483 13.483zM21.305 18.421c-0.319-0.16-1.889-0.934-2.183-1.041-0.294-0.107-0.508-0.16-0.722 0.16s-0.829 1.041-1.016 1.255c-0.187 0.214-0.374 0.241-0.693 0.080s-1.351-0.497-2.573-1.588c-0.951-0.849-1.593-1.894-1.78-2.213s-0.020-0.491 0.140-0.651c0.144-0.144 0.319-0.374 0.479-0.561s0.214-0.321 0.321-0.535c0.107-0.214 0.053-0.401-0.027-0.561s-0.722-1.741-0.989-2.383c-0.267-0.642-0.535-0.552-0.722-0.562-0.187-0.010-0.401-0.010-0.615-0.010s-0.561 0.080-0.856 0.401c-0.294 0.321-1.121 1.095-1.121 2.67s1.148 3.097 1.308 3.311c0.16 0.214 2.183 3.391 5.329 4.745 3.146 1.354 3.146 0.902 3.713 0.849s1.889-0.775 2.156-1.522c0.267-0.748 0.267-1.388 0.187-1.522s-0.294-0.214-0.615-0.374z"/>
+        </svg>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="footer-content">
+            <h3>Dik'S Cafe Wamena</h3>
+            <p>Coffee & Live Space</p>
+            <p>📍 Jln. Gatot Subroto, No.99, Wamena</p>
+            <p>Kabupaten Jayawijaya, Provinsi Papua Pegunungan</p>
+            <p>📱 WhatsApp: 082313976974</p>
+            <p style="margin-top: 20px; opacity: 0.7;">© 2019 Dik'S Cafe Wamena. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <h2>Admin Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input type="text" id="username" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn-secondary" onclick="closeLoginModal()">Batal</button>
+                    <button type="submit" class="btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Storage keys
+        const STORAGE_KEYS = {
+            LOGO: 'diksCafeLogo',
+            MENU_ITEMS: 'diksCafeMenuItems',
+            ADMIN_CREDENTIALS: 'diksCafeAdminCredentials',
+            IS_LOGGED_IN: 'diksCafeIsLoggedIn'
+        };
+
+        // Initialize default admin credentials
+        function initializeApp() {
+            // Set default admin credentials if not exists
+            if (!localStorage.getItem(STORAGE_KEYS.ADMIN_CREDENTIALS)) {
+                const defaultCredentials = {
+                    username: 'admin',
+                    password: 'dikscafe2019'
+                };
+                localStorage.setItem(STORAGE_KEYS.ADMIN_CREDENTIALS, JSON.stringify(defaultCredentials));
+            }
+
+            // Check login status
+            checkLoginStatus();
+
+            // Load logo
+            loadLogo();
+
+            // Load menu items
+            loadMenuItems();
+
+            // Check online/offline status
+            updateOnlineStatus();
+            window.addEventListener('online', updateOnlineStatus);
+            window.addEventListener('offline', updateOnlineStatus);
+        }
+
+        // Online/Offline status
+        function updateOnlineStatus() {
+            const indicator = document.getElementById('offlineIndicator');
+            if (!navigator.onLine) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        }
+
+        // Login Modal
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.add('active');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Handle Login
+        function handleLogin(event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            const credentials = JSON.parse(localStorage.getItem(STORAGE_KEYS.ADMIN_CREDENTIALS));
+            
+            if (username === credentials.username && password === credentials.password) {
+                localStorage.setItem(STORAGE_KEYS.IS_LOGGED_IN, 'true');
+                checkLoginStatus();
+                closeLoginModal();
+                alert('Login berhasil! Selamat datang, Admin.');
+            } else {
+                alert('Username atau password salah!');
+            }
+        }
+
+        // Check Login Status
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem(STORAGE_KEYS.IS_LOGGED_IN) === 'true';
+            
+            if (isLoggedIn) {
+                document.getElementById('loginBtn').classList.add('hidden');
+                document.getElementById('logoutBtn').classList.remove('hidden');
+                document.getElementById('guestView').style.display = 'none';
+                document.getElementById('adminPanel').classList.add('active');
+                loadMenuListForAdmin();
+            } else {
+                document.getElementById('loginBtn').classList.remove('hidden');
+                document.getElementById('logoutBtn').classList.add('hidden');
+                document.getElementById('guestView').style.display = 'block';
+                document.getElementById('adminPanel').classList.remove('active');
+            }
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Apakah Anda yakin ingin logout?')) {
+                localStorage.removeItem(STORAGE_KEYS.IS_LOGGED_IN);
+                checkLoginStatus();
+                alert('Logout berhasil!');
+            }
+        }
+
+        // Upload Logo
+        function uploadLogo(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const logoData = e.target.result;
+                    localStorage.setItem(STORAGE_KEYS.LOGO, logoData);
+                    document.getElementById('logoPreview').src = logoData;
+                    document.getElementById('logoPreview').style.display = 'block';
+                    loadLogo();
+                    alert('Logo berhasil diupload!');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Load Logo
+        function loadLogo() {
+            const logoData = localStorage.getItem(STORAGE_KEYS.LOGO);
+            if (logoData) {
+                document.getElementById('navLogo').src = logoData;
+                document.getElementById('navLogo').style.display = 'block';
+                document.getElementById('logoPreview').src = logoData;
+                document.getElementById('logoPreview').style.display = 'block';
+            }
+        }
+
+        // Preview Menu Image
+        let currentMenuImage = null;
+        function previewMenuImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    currentMenuImage = e.target.result;
+                    document.getElementById('menuImagePreview').src = currentMenuImage;
+                    document.getElementById('menuImagePreview').style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Add Menu Item
+        function addMenuItem(event) {
+            event.preventDefault();
+            
+            const category = document.getElementById('menuCategory').value;
+            const name = document.getElementById('menuName').value;
+            const description = document.getElementById('menuDescription').value;
+            const price = document.getElementById('menuPrice').value;
+            
+            const menuItem = {
+                id: Date.now(),
+                category: category,
+                name: name,
+                description: description,
+                price: price,
+                image: currentMenuImage || null
+            };
+            
+            // Get existing menu items
+            let menuItems = JSON.parse(localStorage.getItem(STORAGE_KEYS.MENU_ITEMS) || '[]');
+            menuItems.push(menuItem);
+            localStorage.setItem(STORAGE_KEYS.MENU_ITEMS, JSON.stringify(menuItems));
+            
+            // Reset form
+            document.getElementById('menuCategory').value = '';
+            document.getElementById('menuName').value = '';
+            document.getElementById('menuDescription').value = '';
+            document.getElementById('menuPrice').value = '';
+            document.getElementById('menuImagePreview').style.display = 'none';
+            currentMenuImage = null;
+            
+            // Reload menu
+            loadMenuItems();
+            loadMenuListForAdmin();
+            
+            alert('Menu berhasil ditambahkan!');
+        }
+
+        // Load Menu Items for Guest View
+        function loadMenuItems() {
+            const menuItems = JSON.parse(localStorage.getItem(STORAGE_KEYS.MENU_ITEMS) || '[]');
+            const menuGrid = document.getElementById('menuGrid');
+            
+            if (menuItems.length === 0) {
+                menuGrid.innerHTML = `
+                    <div class="menu-item">
+                        <div class="menu-item-image">Foto Menu</div>
+                        <div class="menu-item-content">
+                            <h3>Belum ada menu</h3>
+                            <p>Admin sedang mempersiapkan menu untuk Anda</p>
+                            <div class="menu-item-price">Rp 0</div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            menuGrid.innerHTML = menuItems.map(item => `
+                <div class="menu-item" data-category="${item.category}">
+                    ${item.image ? 
+                        `<img src="${item.image}" alt="${item.name}" class="menu-item-image" style="width: 100%; height: 200px; object-fit: cover;">` : 
+                        `<div class="menu-item-image">Foto Menu</div>`
+                    }
+                    <div class="menu-item-content">
+                        <h3>${item.name}</h3>
+                        ${item.description ? `<p>${item.description}</p>` : ''}
+                        <div class="menu-item-price">Rp ${parseInt(item.price).toLocaleString('id-ID')}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Load Menu List for Admin
+        function loadMenuListForAdmin() {
+            const menuItems = JSON.parse(localStorage.getItem(STORAGE_KEYS.MENU_ITEMS) || '[]');
+            const menuList = document.getElementById('menuList');
+            
+            if (menuItems.length === 0) {
+                menuList.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Belum ada menu yang ditambahkan</p>';
+                return;
+            }
+            
+            menuList.innerHTML = menuItems.map(item => `
+                <div class="menu-list-item">
+                    <div class="menu-list-item-info">
+                        <h4>${item.name}</h4>
+                        <p>Kategori: ${getCategoryName(item.category)} | Harga: Rp ${parseInt(item.price).toLocaleString('id-ID')}</p>
+                        ${item.description ? `<p>${item.description}</p>` : ''}
+                    </div>
+                    <div class="menu-list-item-actions">
+                        <button class="btn-delete" onclick="deleteMenuItem(${item.id})">Hapus</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Get Category Name
+        function getCategoryName(category) {
+            const categories = {
+                drinks: 'Minuman',
+                coffee: 'Coffee/Espresso',
+                dumdum: 'Dum-Dum',
+                noncoffee: 'Non Coffee',
+                milky: 'Milky',
+                milkshake: 'Milkshake',
+                moctail: 'Moctail',
+                jus: 'Jus',
+                food: 'Makanan',
+                beef: 'Beef',
+                chicken: 'Chicken',
+                steak: 'Steak',
+                spageti: 'Spageti',
+                seafood: 'Seafood',
+                ikan: 'Ikan',
+                nasigoreng: 'Nasi Goreng',
+                lalapan: 'Lalapan',
+                ricebowl: 'Rice Bowl',
+                nasibakar: 'Nasi Bakar',
+                telur: 'Telur',
+                mie: 'Mie',
+                sayuran: 'Sayuran',
+                snack: 'Snack',
+                sambal: 'Sambal'
+            };
+            return categories[category] || category;
+        }
+
+        // Delete Menu Item
+        function deleteMenuItem(id) {
+            if (confirm('Apakah Anda yakin ingin menghapus menu ini?')) {
+                let menuItems = JSON.parse(localStorage.getItem(STORAGE_KEYS.MENU_ITEMS) || '[]');
+                menuItems = menuItems.filter(item => item.id !== id);
+                localStorage.setItem(STORAGE_KEYS.MENU_ITEMS, JSON.stringify(menuItems));
+                loadMenuItems();
+                loadMenuListForAdmin();
+                alert('Menu berhasil dihapus!');
+            }
+        }
+
+        // Filter Menu
+        function filterMenu(category) {
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const menuItems = document.querySelectorAll('.menu-item');
+            menuItems.forEach(item => {
+                if (category === 'all') {
+                    item.style.display = 'block';
+                } else if (category === 'drinks') {
+                    const itemCategory = item.dataset.category;
+                    if (['drinks', 'coffee', 'dumdum', 'noncoffee', 'milky', 'milkshake', 'moctail', 'jus'].includes(itemCategory)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                } else if (category === 'food') {
+                    const itemCategory = item.dataset.category;
+                    if (['food', 'beef', 'chicken', 'steak', 'spageti', 'seafood', 'ikan', 'nasigoreng', 'lalapan', 'ricebowl', 'nasibakar', 'telur', 'mie', 'sayuran', 'snack', 'sambal'].includes(itemCategory)) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+        // Scroll to Section
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Initialize app on load
+        window.addEventListener('load', initializeApp);
+
+        // Service Worker for offline functionality
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => {
+                console.log('Service Worker registration failed:', err);
+            });
+        }
+    </script>
+</body>
+</html>
